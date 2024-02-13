@@ -2,7 +2,6 @@ services:
   ark:
     container_name: ark
     build:
-      context: .
       dockerfile: Dockerfile
     environment:
       - SESSIONNAME=Ark Docker
@@ -15,7 +14,7 @@ services:
       - GID=1000
       - UID=1000
     volumes:
-      - /my/path/to/ark:/ark
+      - /ark/the_island:/ark
     ports:
     - 7778:7778/udp
     - 7778:7778
