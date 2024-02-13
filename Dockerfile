@@ -61,7 +61,7 @@ RUN mkdir  /ark
 
 
 # We use the git method, because api github has a limit ;)
-RUN  git clone https://github.com/FezVrasta/ark-server-tools.git /home/steam/ark-server-tools
+RUN  git clone https://github.com/arkmanager/ark-server-tools /home/steam/ark-server-tools
 WORKDIR /home/steam/ark-server-tools/
 RUN  git checkout $GIT_TAG 
 # Install 
@@ -90,7 +90,7 @@ RUN mkdir /home/steam/steamcmd &&\
 
 # First run is on anonymous to download the app
 # We can't download from docker hub anymore -_-
-#RUN /home/steam/steamcmd/steamcmd.sh +login anonymous +quit
+RUN /home/steam/steamcmd/steamcmd.sh +login anonymous +quit
 
 EXPOSE ${STEAMPORT} 32330 ${SERVERPORT}
 # Add UDP
