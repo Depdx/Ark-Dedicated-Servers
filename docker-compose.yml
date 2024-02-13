@@ -1,0 +1,24 @@
+services:
+  ark:
+    container_name: ark
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - SESSIONNAME=Ark Docker
+      - SERVERMAP=TheIsland
+      - SERVERPASSWORD="" 
+      - ADMINPASSWORD=12456
+      - BACKUPONSTART=1
+      - UPDATEONSTART=1
+      - TZ=America/New_York
+      - GID=1000
+      - UID=1000
+    volumes:
+      - /my/path/to/ark:/ark
+    ports:
+    - 7778:7778/udp
+    - 7778:7778
+    - 27015:27015/udp
+    - 27015:27015
+    - 32330:32330
