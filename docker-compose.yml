@@ -1,23 +1,27 @@
+volumes:
+  ark_volume:
+
 services:
-  ark:
-    container_name: ark
+  the_island:
+    container_name: TheIsland
     build:
       dockerfile: Dockerfile
     environment:
-      - SESSIONNAME=Ark Docker
+      - SESSIONNAME=FunTimes
       - SERVERMAP=TheIsland
       - SERVERPASSWORD=12456
-      - ADMINPASSWORD=12456
+      - ADMINPASSWORD=1234
       - BACKUPONSTART=1
       - UPDATEONSTART=1
       - TZ=America/New_York
-      - GID=1000
-      - UID=1000
+      - CLUSTERID=dep_cluster
     volumes:
-      - /ark/the_island:/ark
+      - ark_volume:/ark
     ports:
-    - 7778:7778/udp
+    - 7777:7777
+    - 7777:7777/udp
     - 7778:7778
-    - 27015:27015/udp
+    - 7778:7778/udp
     - 27015:27015
-    - 32330:32330
+    - 27015:27015/udp
+    - 27020:32330

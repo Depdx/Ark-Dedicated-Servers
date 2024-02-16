@@ -44,6 +44,10 @@ cp /home/steam/crontab /ark/template/crontab
 
 if [ ! -d /ark/server  ] || [ ! -f /ark/server/arkversion ];then 
 	echo "No game files found. Installing..."
+    mkdir -p /ark/server/ShooterGame/Saved/SavedArks
+	mkdir -p /ark/server/ShooterGame/Content/Mods
+	mkdir -p /ark/server/ShooterGame/Binaries/Linux/
+	touch /ark/server/ShooterGame/Binaries/Linux/ShooterGameServer
 	arkmanager install --verbose
 # Create mod dir
 else
@@ -69,9 +73,9 @@ fi
 
 # Launching ark server
 if [ $UPDATEONSTART -eq 0 ]; then
-	arkmanager start -noautoupdate
+	arkmanager start -noautoupdate -NoTransferFromFiltering -clusterid=${CLUSTERID}
 else
-	arkmanager start
+	arkmanager start -NoTransferFromFiltering -clusterid=${CLUSTERID}
 fi
 
 

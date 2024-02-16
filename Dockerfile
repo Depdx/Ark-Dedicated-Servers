@@ -19,6 +19,7 @@ ENV BACKUPONSTART 1
 # Server PORT (you can't remap with docker, it doesn't work)
 ENV SERVERPORT 27015
 # Steam port (you can't remap with docker, it doesn't work)
+ENV GAMECLIENTPORT 7777
 ENV STEAMPORT 7778
 # if the server should backup after stopping
 ENV BACKUPONSTOP 0
@@ -28,6 +29,8 @@ ENV WARNONSTOP 0
 ENV UID 1000
 # GID of the user steam
 ENV GID 1000
+# Cluster ID
+ENV CLUSTERID "cluster_1"
 
 # Install dependencies 
 RUN apt-get update &&\ 
@@ -85,11 +88,11 @@ RUN curl -s "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar
 RUN tar -xzf "/home/steam/steamcmd/steamcmd_linux.tar.gz" -C "/home/steam/steamcmd"
 
 
-EXPOSE ${STEAMPORT} 32330 ${SERVERPORT}
+EXPOSE ${STEAMPORT} 32330 ${SERVERPORT} ${GAMECLIENTPORT}
 # Add UDP
-EXPOSE ${STEAMPORT}/udp ${SERVERPORT}/udp
+EXPOSE ${STEAMPORT}/udp ${SERVERPORT}/udp ${GAMECLIENTPORT}/udp
 
-VOLUME  /ark 
+VOLUME  /ark
 
 # Change the working directory to /arkd
 WORKDIR /ark
