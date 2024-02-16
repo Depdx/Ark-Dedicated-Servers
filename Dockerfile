@@ -6,7 +6,7 @@ ENV SESSIONNAME "Ark Docker"
 # Map name
 ENV SERVERMAP "TheIsland"
 # Server password
-ENV SERVERPASSWORD ""
+ENV SERVERPASSWORD "12456"
 # Admin password
 ENV ADMINPASSWORD "12456"
 # Nb Players
@@ -15,8 +15,7 @@ ENV NBPLAYERS 70
 ENV UPDATEONSTART 1
 # if the server is backup when start with docker start
 ENV BACKUPONSTART 1
-#  Tag on github for ark server tools
-ENV GIT_TAG v1.6.62
+
 # Server PORT (you can't remap with docker, it doesn't work)
 ENV SERVERPORT 27015
 # Steam port (you can't remap with docker, it doesn't work)
@@ -32,7 +31,7 @@ ENV GID 1000
 
 # Install dependencies 
 RUN apt-get update &&\ 
-    apt-get install -y curl lib32gcc1 lsof git
+    apt-get install -y curl lib32gcc1 lsof git util-linux sudo cron
 
 # Enable passwordless sudo for users under the "sudo" group
 RUN sed -i.bkp -e \
@@ -61,9 +60,9 @@ RUN mkdir  /ark
 
 
 # We use the git method, because api github has a limit ;)
-RUN  git clone https://github.com/arkmanager/ark-server-tools /home/steam/ark-server-tools
+RUN  git clone https://github.com/Depdx/ark-server-tools /home/steam/ark-server-tools
 WORKDIR /home/steam/ark-server-tools/
-RUN  git checkout $GIT_TAG 
+
 # Install 
 WORKDIR /home/steam/ark-server-tools/tools
 RUN chmod +x install.sh 
@@ -80,17 +79,11 @@ COPY instance.cfg /etc/arkmanager/instances/main.cfg
 
 RUN chown steam -R /ark && chmod 755 -R /ark
 
-#USER steam 
+# Install steamcmd
+RUN mkdir -p /home/steam/steamcmd
+RUN curl -s "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" -o "/home/steam/steamcmd/steamcmd_linux.tar.gz"
+RUN tar -xzf "/home/steam/steamcmd/steamcmd_linux.tar.gz" -C "/home/steam/steamcmd"
 
-# download steamcmd
-RUN mkdir /home/steam/steamcmd &&\ 
-	cd /home/steam/steamcmd &&\ 
-	curl http://media.steampowered.com/installer/steamcmd_linux.tar.gz | tar -vxz 
-
-
-# First run is on anonymous to download the app
-# We can't download from docker hub anymore -_-
-RUN /home/steam/steamcmd/steamcmd.sh +login anonymous +quit
 
 EXPOSE ${STEAMPORT} 32330 ${SERVERPORT}
 # Add UDP

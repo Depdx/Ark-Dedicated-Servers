@@ -6,7 +6,7 @@ services:
     environment:
       - SESSIONNAME=Ark Docker
       - SERVERMAP=TheIsland
-      - SERVERPASSWORD="" 
+      - SERVERPASSWORD=12456
       - ADMINPASSWORD=12456
       - BACKUPONSTART=1
       - UPDATEONSTART=1
