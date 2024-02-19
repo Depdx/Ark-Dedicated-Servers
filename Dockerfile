@@ -86,7 +86,7 @@ RUN chown steam -R /ark && chmod 755 -R /ark
 RUN mkdir -p /home/steam/steamcmd
 RUN curl -s "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" -o "/home/steam/steamcmd/steamcmd_linux.tar.gz"
 RUN tar -xzf "/home/steam/steamcmd/steamcmd_linux.tar.gz" -C "/home/steam/steamcmd"
-
+ENV PATH="/home/steam/steamcmd:${PATH}"
 
 EXPOSE ${STEAMPORT} 32330 ${SERVERPORT} ${GAMECLIENTPORT}
 # Add UDP

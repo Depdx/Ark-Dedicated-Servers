@@ -40,16 +40,14 @@ cp /home/steam/crontab /ark/template/crontab
 [ ! -L /ark/GameUserSettings.ini ] && ln -s server/ShooterGame/Saved/Config/LinuxServer/GameUserSettings.ini GameUserSettings.ini
 [ ! -f /ark/crontab ] && cp /ark/template/crontab /ark/crontab
 
-
-
-if [ ! -d /ark/server  ] || [ ! -f /ark/server/arkversion ];then 
+if [ ! -d /ark/server  ] || [ ! -f /ark/server/version.txt ];then 
 	echo "No game files found. Installing..."
     mkdir -p /ark/server/ShooterGame/Saved/SavedArks
 	mkdir -p /ark/server/ShooterGame/Content/Mods
 	mkdir -p /ark/server/ShooterGame/Binaries/Linux/
 	touch /ark/server/ShooterGame/Binaries/Linux/ShooterGameServer
 	arkmanager install --verbose
-# Create mod dir
+    arkmanager installmods --verbose
 else
 
 	if [ ${BACKUPONSTART} -eq 1 ] && [ "$(ls -A server/ShooterGame/Saved/SavedArks/)" ]; then 
@@ -73,9 +71,9 @@ fi
 
 # Launching ark server
 if [ $UPDATEONSTART -eq 0 ]; then
-	arkmanager start -noautoupdate -NoTransferFromFiltering -clusterid=${CLUSTERID}
+	arkmanager start -noautoupdate
 else
-	arkmanager start -NoTransferFromFiltering -clusterid=${CLUSTERID}
+	arkmanager start
 fi
 
 

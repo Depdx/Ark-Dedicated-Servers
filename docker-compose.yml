@@ -1,9 +1,8 @@
-volumes:
-  ark_volume:
-
 services:
   the_island:
     container_name: TheIsland
+    mem_limit: 8g
+    restart: always
     build:
       dockerfile: Dockerfile
     environment:
@@ -24,4 +23,207 @@ services:
     - 7778:7778/udp
     - 27015:27015
     - 27015:27015/udp
-    - 27020:32330
+    - 32330:32330
+  scorched_earth:
+    container_name: ScorchedEarth
+    mem_limit: 8g
+    restart: always
+    build:
+      dockerfile: Dockerfile
+    environment:
+      - SESSIONNAME=FunTimes
+      - SERVERMAP=ScorchedEarth_P
+      - SERVERPASSWORD=12456
+      - ADMINPASSWORD=1234
+      - BACKUPONSTART=1
+      - UPDATEONSTART=1
+      - TZ=America/New_York
+      - CLUSTERID=dep_cluster
+    volumes:
+      - ark_volume:/ark
+    ports:
+    - 7777:7777
+    - 7777:7777/udp
+    - 7778:7778
+    - 7778:7778/udp
+    - 27015:27015
+    - 27015:27015/udp
+    - 32330:32330
+  the_center:
+    container_name: TheCenter
+    mem_limit: 8g
+    restart: always
+    build:
+      dockerfile: Dockerfile
+    environment:
+      - SESSIONNAME=FunTimes
+      - SERVERMAP=TheCenter
+      - SERVERPASSWORD=12456
+      - ADMINPASSWORD=1234
+      - BACKUPONSTART=1
+      - UPDATEONSTART=1
+      - TZ=America/New_York
+      - CLUSTERID=dep_cluster
+    volumes:
+      - ark_volume:/ark
+    ports:
+    - 7777:7777
+    - 7777:7777/udp
+    - 7778:7778
+    - 7778:7778/udp
+    - 27015:27015
+    - 27015:27015/udp
+    - 32330:32330
+  ragnarok:
+    container_name: Ragnarok
+    mem_limit: 8g
+    restart: always
+    build:
+      dockerfile: Dockerfile
+    environment:
+      - SESSIONNAME=FunTimes
+      - SERVERMAP=Ragnarok
+      - SERVERPASSWORD=12456
+      - ADMINPASSWORD=1234
+      - BACKUPONSTART=1
+      - UPDATEONSTART=1
+      - TZ=America/New_York
+      - CLUSTERID=dep_cluster
+    volumes:
+      - ark_volume:/ark
+    ports:
+    - 7777:7777
+    - 7777:7777/udp
+    - 7778:7778
+    - 7778:7778/udp
+    - 27015:27015
+    - 27015:27015/udp
+    - 32330:32330
+  aberration:
+    container_name: Aberration
+    mem_limit: 8g
+    restart: always
+    build:
+      dockerfile: Dockerfile
+    environment:
+      - SESSIONNAME=FunTimes
+      - SERVERMAP=Aberration_P
+      - SERVERPASSWORD=12456
+      - ADMINPASSWORD=1234
+      - BACKUPONSTART=1
+      - UPDATEONSTART=1
+      - TZ=America/New_York
+      - CLUSTERID=dep_cluster
+    volumes:
+      - ark_volume:/ark
+    ports:
+    - 7777:7777
+    - 7777:7777/udp
+    - 7778:7778
+    - 7778:7778/udp
+    - 27015:27015
+    - 27015:27015/udp
+    - 32330:32330
+  extinction:
+    container_name: Extinction
+    mem_limit: 8g
+    restart: always
+    build:
+      dockerfile: Dockerfile
+    environment:
+      - SESSIONNAME=FunTimes
+      - SERVERMAP=Extinction
+      - SERVERPASSWORD=12456
+      - ADMINPASSWORD=1234
+      - BACKUPONSTART=1
+      - UPDATEONSTART=1
+      - TZ=America/New_York
+      - CLUSTERID=dep_cluster
+    volumes:
+      - ark_volume:/ark
+    ports:
+    - 7777:7777
+    - 7777:7777/udp
+    - 7778:7778
+    - 7778:7778/udp
+    - 27015:27015
+    - 27015:27015/udp
+    - 32330:32330
+  valguero:
+    container_name: Valguero
+    mem_limit: 8g
+    restart: always
+    build:
+      dockerfile: Dockerfile
+    environment:
+      - SESSIONNAME=FunTimes
+      - SERVERMAP=Valguero_P
+      - SERVERPASSWORD=12456
+      - ADMINPASSWORD=1234
+      - BACKUPONSTART=1
+      - UPDATEONSTART=1
+      - TZ=America/New_York
+      - CLUSTERID=dep_cluster
+    volumes:
+      - ark_volume:/ark
+    ports:
+    - 7777:7777
+    - 7777:7777/udp
+    - 7778:7778
+    - 7778:7778/udp
+    - 27015:27015
+    - 27015:27015/udp
+    - 32330:32330
+  lost_island:
+    container_name: LostIsland
+    mem_limit: 8g
+    restart: always
+    build:
+      dockerfile: Dockerfile
+    environment:
+      - SESSIONNAME=FunTimes
+      - SERVERMAP=LostIsland
+      - SERVERPASSWORD=12456
+      - ADMINPASSWORD=1234
+      - BACKUPONSTART=1
+      - UPDATEONSTART=1
+      - TZ=America/New_York
+      - CLUSTERID=dep_cluster
+    volumes:
+      - ark_volume:/ark
+    ports:
+    - 7777:7777
+    - 7777:7777/udp
+    - 7778:7778
+    - 7778:7778/udp
+    - 27015:27015
+    - 27015:27015/udp
+    - 32330:32330
+  fjordu:
+    container_name: Fjordur
+    mem_limit: 8g
+    restart: always
+    build:
+      dockerfile: Dockerfile
+    environment:
+      - SESSIONNAME=FunTimes
+      - SERVERMAP=Fjordur
+      - SERVERPASSWORD=12456
+      - ADMINPASSWORD=1234
+      - BACKUPONSTART=1
+      - UPDATEONSTART=1
+      - TZ=America/New_York
+      - CLUSTERID=dep_cluster
+    volumes:
+      - ark_volume:/ark
+    ports:
+    - 7777:7777
+    - 7777:7777/udp
+    - 7778:7778
+    - 7778:7778/udp
+    - 27015:27015
+    - 27015:27015/udp
+    - 32330:32330
+
+volumes:
+  ark_volume:

@@ -11,6 +11,9 @@ if [ ! "$(id -g steam)" -eq "$GID" ]; then
 	groupmod -o -g "$GID" steam ; 
 fi
 
+mkdir -p /ark/log/${SERVERMAP}
+chmod -R 777 /ark/log/${SERVERMAP}
+
 # Put steam owner of directories (if the uid changed, then it's needed)
 chown -R steam:steam /ark /home/steam
 
