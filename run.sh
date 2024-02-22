@@ -56,6 +56,7 @@ else
 	fi
 fi
 
+# arkmanager installmods --verbose
 
 # If there is uncommented line in the file
 CRONNUMBER=`grep -v "^#" /ark/crontab | wc -l`
